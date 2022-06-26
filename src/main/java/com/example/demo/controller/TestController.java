@@ -26,25 +26,27 @@ public class TestController {
   @GetMapping("/config/topics/{topicName}")
   public ResponseEntity<String> getTopic(@PathVariable String topicName) {
     System.out.println("client1 Test OK " + topicName);
-    return ResponseEntity.ok("client1 test1 OK " + topicName);
+    return ResponseEntity.ok("client1 test OK " + topicName);
   }
 
   @GetMapping("/config/types/{typeId}")
-  public ResponseEntity<String> getConfigType(@RequestHeader(value = "GUAC-Authorization", required = false) String token, @PathVariable Integer typeId) {
-    System.out.println("client1 Test OK " + typeId);
-    return ResponseEntity.ok("client1 test2 OK " + typeId + " + token " + token);
+  public ResponseEntity<String> getConfigType(@RequestHeader(value = "Authorization", required = false) String token,
+                                              @RequestHeader(value = "X-client-name", required = false) String username,
+                                              @PathVariable Integer typeId) {
+    System.out.println("client1 Test OK " + typeId + " - username: " + username);
+    return ResponseEntity.ok("client1 test OK " + typeId + " - token " + token + " - username: " + username);
   }
 
   @PostMapping("/config/types/{typeId}")
-  public ResponseEntity<String> getConfigType(@RequestHeader(value = "GUAC-Authorization", required = false) String token,
+  public ResponseEntity<String> getConfigType(@RequestHeader(value = "Authorization", required = false) String token,
       @PathVariable Integer typeId,
       @RequestBody TestPayload payload) {
     System.out.println("POST client1 Test OK " + typeId + " " + payload);
-    return ResponseEntity.ok("client1 test2 OK " + typeId + " + token " + token + " payload " + payload);
+    return ResponseEntity.ok("client1 test OK " + typeId + " - token " + token + " - payload " + payload);
   }
 
   @GetMapping("/config/test/exception")
-  public ResponseEntity<String> getException(@RequestHeader(value = "GUAC-Authorization", required = false) String token) {
+  public ResponseEntity<String> getException(@RequestHeader(value = "Authorization", required = false) String token) {
     System.out.println("client1 Test exception " + token);
     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Test exception");
   }
