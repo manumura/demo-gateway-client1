@@ -28,10 +28,9 @@ public class TestController {
 
     @GetMapping("/config/types/{typeId}")
     public ResponseEntity<String> getConfigType(@RequestHeader(value = "Authorization", required = false) String token,
-                                                @RequestHeader(value = "X-client-name", required = false) String username,
                                                 @PathVariable Integer typeId) {
-        System.out.println("client1 Test OK " + typeId + " - username: " + username);
-        return ResponseEntity.ok("client1 test OK " + typeId + " - token " + token + " - username: " + username);
+        System.out.println("client1 Test OK " + typeId);
+        return ResponseEntity.ok("client1 test OK " + typeId + " - token " + token);
     }
 
     @PostMapping("/config/types/{typeId}")
