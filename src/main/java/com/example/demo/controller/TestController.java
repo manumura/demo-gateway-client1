@@ -14,22 +14,23 @@ import org.springframework.web.bind.annotation.*;
 public class TestController {
 
     @GetMapping("/config/topics")
-    public ResponseEntity<List<Topic>> getTopics() {
-        final List<Topic> topics = Arrays.asList(new Topic(1, "JOB_QUEUE"));
-        System.out.println("client1 topics " + topics);
+    public ResponseEntity<List<Topic>> getTopics(@RequestHeader(value = "Authorization", required = false) String token) {
+        final List<Topic> topics = List.of(new Topic(1, "JOB_QUEUE"));
+        System.out.println("client1 topics " + topics + " - token " + token);
         return ResponseEntity.ok(topics);
     }
 
     @GetMapping("/config/topics/{topicName}")
-    public ResponseEntity<String> getTopic(@PathVariable String topicName) {
-        System.out.println("client1 Test OK " + topicName);
+    public ResponseEntity<String> getTopic(@RequestHeader(value = "Authorization", required = false) String token,
+                                           @PathVariable String topicName) {
+        System.out.println("client1 Test OK " + topicName + " - token " + token);
         return ResponseEntity.ok("client1 test OK " + topicName);
     }
 
     @GetMapping("/config/types/{typeId}")
     public ResponseEntity<String> getConfigType(@RequestHeader(value = "Authorization", required = false) String token,
                                                 @PathVariable Integer typeId) {
-        System.out.println("client1 Test OK " + typeId);
+        System.out.println("client1 Test OK " + typeId + " - token " + token);
         return ResponseEntity.ok("client1 test OK " + typeId + " - token " + token);
     }
 
@@ -37,7 +38,7 @@ public class TestController {
     public ResponseEntity<String> getConfigType(@RequestHeader(value = "Authorization", required = false) String token,
                                                 @PathVariable Integer typeId,
                                                 @RequestBody TestPayload payload) {
-        System.out.println("POST client1 Test OK " + typeId + " " + payload);
+        System.out.println("POST client1 Test OK " + typeId + " - token " + token + " - payload " + payload);
         return ResponseEntity.ok("client1 test OK " + typeId + " - token " + token + " - payload " + payload);
     }
 
