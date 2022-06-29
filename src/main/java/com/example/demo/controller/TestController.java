@@ -5,6 +5,7 @@ import com.example.demo.dto.Topic;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +16,7 @@ public class TestController {
 
     @GetMapping("/config/topics")
     public ResponseEntity<List<Topic>> getTopics(@RequestHeader(value = "Authorization", required = false) String token) {
-        final List<Topic> topics = List.of(new Topic(1, "JOB_QUEUE"));
+        final List<Topic> topics = List.of(new Topic(UUID.randomUUID().toString(), "JOB_QUEUE"));
         System.out.println("client1 topics " + topics + " - token " + token);
         return ResponseEntity.ok(topics);
     }
