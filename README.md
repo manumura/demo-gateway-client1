@@ -2,9 +2,9 @@
 
 From layers
 
-``` docker build  -f ./Dockerfile -t demo-gateway-client1 . ```
+``` docker build -t manumura/demo-gateway-client1:latest . ```
 
-``` docker run -p 8080:8080 -d --name demo-gateway-client1 demo-gateway-client1 ```
+``` docker run -p 8080:8080 -d --name demo-gateway-client1 manumura/demo-gateway-client1 ```
 
 ``` docker container logs demo-gateway-client1 -f ```
 

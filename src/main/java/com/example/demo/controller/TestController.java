@@ -15,7 +15,7 @@ public class TestController {
 
     @GetMapping("/config/topics")
     public ResponseEntity<List<Topic>> getTopics(@RequestHeader(value = "Authorization", required = false) String token, Principal principal) {
-        final List<Topic> topics = List.of(new Topic(UUID.randomUUID().toString(), "JOB_QUEUE"));
+        final List<Topic> topics = List.of(new Topic(UUID.randomUUID().toString(), "TOPIC_CLIENT1"));
         System.out.println("client1 topics " + topics + " - token " + token + " - principal: " + principal);
         return ResponseEntity.ok(topics);
     }
